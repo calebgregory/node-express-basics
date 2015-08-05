@@ -1,0 +1,29 @@
+{
+  "name": "node-express-basics",
+  "version": "1.0.0",
+  "description": "My very first express app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calebgregory/node-express-basics.git"
+  },
+  "author": "Caleb Gregory <calebgregory@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/calebgregory/node-express-basics/issues"
+  },
+  "homepage": "https://github.com/calebgregory/node-express-basics#readme",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
+    "imgur": "^0.1.6",
+    "less-middleware": "^2.0.1",
+    "loggly": "^1.0.8",
+    "morgan": "^1.6.1",
+    "multer": "^1.0.1"
+  }
+}

@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= title %> | favs</title>
+  </head>
+  <body>
+    <h1>the site is <%= title %></h1>
+    <h2><%= welcome %></h2>
+    <h3>these are a few of my favorite things . . .</h3>
+    <ul>
+      <% favoriteThings.forEach(function(thing) { %>
+        <li><%= thing %> is awesome!</li>
+      <% }); %>
+    </ul>
+  </body>
+</html>

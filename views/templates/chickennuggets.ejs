@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= title %> | Chicken Nuggets</title>
+  </head>
+  <body>
+    <h1>Wold Famus Chiquen Nuggets</h1>
+    <form action="chickennuggets/order" method="POST">
+      Wots ur name? <input name="name" type="text" placeholder="Name">
+      Selek ur style: <select name="style">
+        <option value="mild">Mild</option>
+        <option value="medium">Medium</option>
+        <option value="hot">Hot</option>
+        <option value="jetfuel">Jet Fuel</option>
+      </select>
+      Qty: <input name="qty" type="number" min="1" value="6">
+      <input type="submit" value="Odor me nuggs">
+    </form>
+  </body>
+</html>
