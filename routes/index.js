@@ -13,16 +13,12 @@ router.get('/hello', function (req, res) {
 // this will look for the folder 'views' and from there
 // we utilize whatever template we write
 router.get('/favoritethings', function (req, res) {
-  var favoriteThings = [
-    'raindrops on roses',
-    'whiskers on kittens',
-    'healthy ambition',
-    'space jam'
-  ];
-
-  res.render('templates/world', {
-    welcome : '[Welcome message]',
-    favoriteThings : favoriteThings
+  var collection = global.db.collection('awesomeThings');
+  collection.find().toArray(function(err,awesomeThings) {
+    res.render('templates/world', {
+      welcome : '[Welcome message]',
+      favoriteThings : awesomeThings
+    });
   });
 });
 
