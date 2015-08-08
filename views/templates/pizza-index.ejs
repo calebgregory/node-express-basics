@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= title %> | pizza shoppe</title>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+  </head>
+  <body>
+    <h1>all a'da pizza piyas!</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Toppings</th>
+          <th>Ordered</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% orders.forEach(function(order) { %>
+        <%   if(!order.complete) { %>
+        <tr>
+          <td><%= order.name %></td>
+          <td><%= order.toppings %></td>
+          <td><%= order.createdAt %></td>
+          <td>
+            <form action="/pizza/order/<%= order._id %>/complete" method="POST">
+              <input type="submit" value="complete">
+            </form>
+          </td>
+        </tr>
+        <% }}); %>
+      </tbody>
+    </table>
+    <h3>Completed Orders</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Toppings</th>
+          <th>Ordered</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% orders.forEach(function(order) { %>
+        <%   if(order.complete) { %>
+        <tr>
+          <td><%= order.name %></td>
+          <td><%= order.toppings %></td>
+          <td><%= order.createdAt %></td>
+        </tr>
+        <% }}); %>
+      </tbody>
+    </table>
+  </body>
+</html>

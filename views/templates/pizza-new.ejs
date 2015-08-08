@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= title %> | pizza shoppe | order</title>
+  </head>
+  <body>
+    <h1>order</h1>
+    <form action="/pizza/order" method="POST">
+      <input type="text" name="name" placeholder="Luigi">
+      <input type="checkbox" name="toppings" value="cheese"> cheese
+      <input type="checkbox" name="toppings" value="pepperoni"> pepperoni
+      <input type="checkbox" name="toppings" value="mushrooms"> mushrooms
+      <input type="checkbox" name="toppings" value="pineapple"> pineapple
+      <input type="submit" value="place order">
+    </form>
+  </body>
+</html>
