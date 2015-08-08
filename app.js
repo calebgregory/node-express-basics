@@ -13,7 +13,7 @@ var path = require('path');
 var routes = require('./routes/index');
 var pizza = require('./routes/pizza');
 var chickennuggets = require('./routes/chickennuggets');
-var imgurUp = require('./routes/imgurUp');
+var imgurThings = require('./routes/imgur-things');
 
 
 // variables //
@@ -93,7 +93,7 @@ app.use(bodyParser.urlencoded({
 app.use('/', routes);
 app.use('/pizza', pizza);
 app.use('/chickennuggets', chickennuggets);
-app.use('/imgur', imgurUp);
+app.use('/imgur', imgurThings);
 
 
 // errors //

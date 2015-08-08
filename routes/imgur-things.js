@@ -16,7 +16,22 @@ var upload = multer({
 });
 
 router.get('/', function(req,res) {
-  res.render('templates/imgur');
+  var collection = global.db.collection('imgur');
+  collection.find({}).toArray(function(err,pictures){
+    var formattedPictures = pictures.map(function(picture) {
+      return {
+        _id : picture._id,
+        url : picture.url
+      };
+    });
+    res.render('templates/imgur-lib',
+              { pictures : formattedPictures });
+  });
+
+});
+
+router.get('/new', function(req,res) {
+  res.render('templates/imgur-new');
 });
 
 router.post('/upload', upload.single('image'), function(req,res) {
@@ -25,7 +40,12 @@ router.post('/upload', upload.single('image'), function(req,res) {
       .uploadFile(req.file.path)
       .then(function(json) {
         fs.unlink(req.file.path, function() {
-          res.redirect(json.data.link);
+          var collection = global.db.collection('imgur');
+          collection.insert({ url : json.data.link },
+                           function() {
+                             res.redirect('/imgur');
+                           }
+         );
         });
       })
       .catch(function(err) {

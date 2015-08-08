@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= title %> | imgur library</title>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+  </head>
+  <body>
+    <a href="/imgur/new">add picture</a>
+    <div class="pictures">
+      <% pictures.forEach(function(picture) { %>
+      <img src="<%= picture.url %>">
+      <% }); %>
+    </div>
+  </body>
+</html>
