@@ -19,6 +19,8 @@ var imgurUp = require('./routes/imgurUp');
 // variables //
 
 var app = express();
+require(path.join(process.cwd(),'/lib/secrets'));
+require(path.join(process.cwd(),'/lib/mongodb'));
 
 
 // settings //
@@ -32,7 +34,7 @@ app.set('case sensitive routing', true);
 
 // these are constants for the lifecycle of the app
 app.locals.title = 'myapp.co';
-require(path.join(process.cwd(),'/lib/secrets'));
+
 
 // middlewares //
 
@@ -85,12 +87,14 @@ app.use(bodyParser.urlencoded({
   type     : '*/x-www-form-urlencoded'
 }));
 
+
 // routes //
 
 app.use('/', routes);
 app.use('/pizza', pizza);
 app.use('/chickennuggets', chickennuggets);
 app.use('/imgur', imgurUp);
+
 
 // errors //
 
@@ -116,7 +120,7 @@ app.use(function(err, req, res, next) {
     error  : err
   });
   var errStream = fs.createWriteStream('errors.log', {flags : 'a'});
-  errStream.write(err+'\n');
+  errStream.write(err+'\n'+err.stack+'\n');
   res.status(500).send('[Error message]');
 });
 
