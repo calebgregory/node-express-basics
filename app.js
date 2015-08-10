@@ -19,7 +19,9 @@ var imgurThings = require('./routes/imgur-things');
 // variables //
 
 var app = express();
-require(path.join(process.cwd(),'/lib/secrets'));
+if(process.env.NODE_ENV !== 'production') {
+  require(path.join(process.cwd(),'/lib/secrets'));
+}
 require(path.join(process.cwd(),'/lib/mongodb'));
 
 
