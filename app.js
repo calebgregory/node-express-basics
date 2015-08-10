@@ -1,4 +1,4 @@
-console.log(process.env.PORT);
+console.log(process.env);
 console.log('port',process.env.PORT);
 console.log('NODE_ENV',process.env.NODE_ENV);
 
