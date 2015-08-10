@@ -1,6 +1,7 @@
 console.log(process.env);
 console.log('port',process.env.PORT);
 console.log('NODE_ENV',process.env.NODE_ENV);
+console.log('ENV',process.env.ENV);
 
 // npm requires //
 
