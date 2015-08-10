@@ -1,4 +1,7 @@
-console.log(process.env);
+console.log(process.env.PORT);
+console.log('port',process.env.PORT);
+console.log('NODE_ENV',process.env.NODE_ENV);
+
 // npm requires //
 
 var bodyParser = require('body-parser');
