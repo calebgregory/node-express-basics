@@ -1,26 +1,29 @@
 var express = require('express');
 var moment = require('moment');
 var ObjectID = require('mongodb').ObjectID;
+var path = require('path');
 
+var Order = require(path.join(process.cwd(),
+                            '/models/ChickenNuggets'));
 var router = express.Router();
 
 router.get('/', function(req,res) {
 
-  var collection = global.db.collection('chickenNuggets');
-  collection.find({}).toArray(function(err,orders) {
-    var formattedOrders = orders.map(function(order) {
-      return {
-        _id       : order._id,
-        name      : order.name,
-        flavor    : order.style,
-        qty       : order.qty,
-        complete  : order.complete,
-        createdAt : moment(order._id.getTimestamp()).fromNow()
-      };
-    });
+  Order.findAll(function(err,orders) {
     res.render('templates/chicken-index',
-              { orders : formattedOrders });
+              { orders : formatAll(orders) });
   });
+
+  function formatAll(orders) {
+
+    return orders.map(function(order) {
+      order.flavor = order.style;
+      order.createdAt = moment(order._id.getTimestamp()).fromNow();
+      delete order.style;
+      return order;
+    });
+
+  }
 
 });
 
@@ -30,29 +33,30 @@ router.get('/order', function(req,res) {
 
 router.post('/order', function(req,res) {
 
-  var collection = global.db.collection('chickenNuggets');
-  var newOrder = {
-    name      : req.body.name,
-    style     : req.body.style,
-    qty       : req.body.qty,
-    complete  : false
-  };
-  collection.save(newOrder,function() {
+  var order = new Order(req.body);
+
+  order.save(function() {
     res.redirect('/chickennuggets');
   });
+
+//  var collection = global.db.collection('chickenNuggets');
+//  var newOrder = {
+//    name      : req.body.name,
+//    style     : req.body.style,
+//    qty       : req.body.qty,
+//    complete  : false
+//  };
 
 });
 
 router.post('/order/:id/complete', function(req,res) {
 
-  var collection = global.db.collection('chickenNuggets');
-  collection.update(
-    { _id  : ObjectID(req.params.id) },
-    { $set : {complete:true} },
-    function() {
-      res.redirect('/chickennuggets');
-    }
-  );
+  var order = Order.findById(req.params.id,
+    function(err,order) {
+      order.setIsComplete(function() {
+        res.redirect('/chickennuggets');
+      });
+  });
 
 });
 
