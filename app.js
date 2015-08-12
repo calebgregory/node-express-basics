@@ -1,8 +1,3 @@
-console.log(process.env);
-console.log('port',process.env.PORT);
-console.log('NODE_ENV',process.env.NODE_ENV);
-console.log('ENV',process.env.ENV);
-
 // npm requires //
 
 var bodyParser = require('body-parser');
@@ -24,9 +19,9 @@ var imgurThings = require('./routes/imgur-things');
 // variables //
 
 var app = express();
-//if(process.env.NODE_ENV !== 'production') {
-  //require(path.join(process.cwd(),'/lib/secrets'));
-//}
+if(process.env.NODE_ENV !== 'production') {
+  require(path.join(process.cwd(),'/lib/secrets'));
+}
 require(path.join(process.cwd(),'/lib/mongodb'));
 
 
